@@ -1,0 +1,33 @@
+{
+  "userName": "Mom",
+  "settings": {
+    "waterReminder": true,
+    "soundEnabled": true
+  },
+  "medicines": [
+    {
+      "id": "m1",
+      "name": "Nurokind 500",
+      "timings": ["10:00"],
+      "mealRelation": "after",
+      "daysLeft": 28,
+      "totalDays": 30
+    },
+    {
+      "id": "m2",
+      "name": "Magrium",
+      "timings": ["21:00"],
+      "mealRelation": "after",
+      "daysLeft": 28,
+      "totalDays": 30
+    },
+    {
+      "id": "m3",
+      "name": "Gabanyl NT 400",
+      "timings": ["21:00"],
+      "mealRelation": "after",
+      "daysLeft": 28,
+      "totalDays": 30
+    }
+  ]
+}

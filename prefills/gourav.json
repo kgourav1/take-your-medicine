@@ -1,0 +1,49 @@
+{
+  "userName": "Gourav",
+  "settings": {
+    "waterReminder": true,
+    "soundEnabled": true
+  },
+  "medicines": [
+    {
+      "id": "g1",
+      "name": "Angpen",
+      "timings": ["10:00", "15:00", "21:00"],
+      "mealRelation": "after",
+      "daysLeft": 5,
+      "totalDays": 5
+    },
+    {
+      "id": "g2",
+      "name": "Metro 400",
+      "timings": ["10:00", "15:00", "21:00"],
+      "mealRelation": "after",
+      "daysLeft": 5,
+      "totalDays": 5
+    },
+    {
+      "id": "g3",
+      "name": "Ketorol - DT",
+      "timings": ["15:00", "21:00"],
+      "mealRelation": "after",
+      "daysLeft": 3,
+      "totalDays": 3
+    },
+    {
+      "id": "g4",
+      "name": "Chymoral",
+      "timings": ["10:00", "15:00", "21:00"],
+      "mealRelation": "before",
+      "daysLeft": 5,
+      "totalDays": 5
+    },
+    {
+      "id": "g5",
+      "name": "Pan 40",
+      "timings": ["10:00"],
+      "mealRelation": "before",
+      "daysLeft": 5,
+      "totalDays": 5
+    }
+  ]
+}

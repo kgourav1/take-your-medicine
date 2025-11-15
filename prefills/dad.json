@@ -1,0 +1,25 @@
+{
+  "userName": "Dad",
+  "settings": {
+    "waterReminder": true,
+    "soundEnabled": true
+  },
+  "medicines": [
+    {
+      "id": "p1",
+      "name": "Vitamin D",
+      "timings": ["10:00"],
+      "mealRelation": "after",
+      "daysLeft": 30,
+      "totalDays": 30
+    },
+    {
+      "id": "p2",
+      "name": "Blood Pressure",
+      "timings": ["21:00"],
+      "mealRelation": "before",
+      "daysLeft": 60,
+      "totalDays": 60
+    }
+  ]
+}

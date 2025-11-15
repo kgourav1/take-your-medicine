@@ -70,22 +70,68 @@ function init() {
 
 function loadData() {
   const stored = window.localStorage.getItem(STORAGE_KEY);
+
   if (stored) {
     try {
       appData = JSON.parse(stored);
-      // Ensure settings exist
-      if (!appData.settings) {
+      if (!appData.settings)
         appData.settings = { waterReminder: true, soundEnabled: true };
-      }
-      if (!appData.history) {
-        appData.history = {};
-      }
+      if (!appData.history) appData.history = {};
+      return; // use existing data
     } catch (e) {
       console.error("Error loading data:", e);
     }
   } else {
-    appData = getDefaultAppData(); // fallback if nothing stored
+    appData = getDefaultAppData();
   }
+}
+
+async function loadPrefillData(name) {
+  try {
+    const response = await fetch(`prefills/${name}.json`);
+    if (!response.ok) return null;
+    return await response.json();
+  } catch (e) {
+    console.error("Prefill load error", e);
+    return null;
+  }
+}
+
+function mergePrefill(prefill) {
+  if (!prefill) return;
+
+  // Username – only if empty
+  if (!appData.userName && prefill.userName) {
+    appData.userName = prefill.userName;
+  }
+
+  // Settings – fill only missing keys
+  if (prefill.settings) {
+    appData.settings = {
+      ...prefill.settings,
+      ...appData.settings, // user overrides prefill
+    };
+  }
+
+  // Medicines – add only new ones (matching by name)
+  if (prefill.medicines?.length) {
+    prefill.medicines.forEach((pf) => {
+      const exists = appData.medicines.some(
+        (m) => m.name.toLowerCase() === pf.name.toLowerCase()
+      );
+      if (!exists) appData.medicines.push(pf);
+    });
+  }
+
+  saveData();
+}
+
+function getPrefillName() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.has("profile")) return params.get("profile").toLowerCase();
+
+  const parts = window.location.pathname.split("/");
+  return parts[parts.length - 1].toLowerCase();
 }
 
 function getDefaultAppData() {
@@ -726,9 +772,17 @@ function showToast(message) {
 // Initialize on load
 // ===================================
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
   loadData();
   updateDaysLeft();
+
+  const prefillName = getPrefillName();
+
+  if (prefillName) {
+    const prefill = await loadPrefillData(prefillName);
+    mergePrefill(prefill);
+  }
+
   init();
 });
 

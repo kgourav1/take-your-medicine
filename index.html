@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Take Your Medicine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Onboarding Screen -->
+    <div id="onboarding" class="screen">
+      <div class="onboarding-content">
+        <div class="logo">💊</div>
+        <h1>Take Your Medicine</h1>
+        <p class="subtitle">Never miss your medications again</p>
+
+        <div class="onboarding-form">
+          <div class="form-group">
+            <label for="userName">Your Name</label>
+            <input
+              type="text"
+              id="userName"
+              placeholder="Enter your name"
+              required
+            />
+          </div>
+
+          <button class="btn btn-primary" onclick="completeOnboarding()">
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Home Screen -->
+    <div id="home" class="screen">
+      <div class="screen-header">
+        <h2>Hello, <span id="userNameDisplay">User</span>! 👋</h2>
+        <p class="current-time" id="currentTime"></p>
+      </div>
+
+      <div class="upcoming-section">
+        <h3>Upcoming</h3>
+        <div id="upcomingCard" class="upcoming-card">
+          <!-- Dynamic content -->
+        </div>
+      </div>
+
+      <div class="quick-stats">
+        <div class="stat-card">
+          <div class="stat-icon">💊</div>
+          <div class="stat-info">
+            <div class="stat-value" id="todayTaken">0</div>
+            <div class="stat-label">Taken Today</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏰</div>
+          <div class="stat-info">
+            <div class="stat-value" id="todayPending">0</div>
+            <div class="stat-label">Pending</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Medicine Screen -->
+    <div id="addMedicine" class="screen">
+      <div class="screen-header">
+        <h2>Add Medicine</h2>
+        <p>Manage your medication schedule</p>
+      </div>
+
+      <div class="form-container">
+        <div class="form-group">
+          <label for="medicineName">Medicine Name</label>
+          <input type="text" id="medicineName" placeholder="e.g., Aspirin" />
+        </div>
+
+        <div class="form-group">
+          <label>Timing</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="timingBreakfast" value="10:00" />
+              <span>Breakfast (10:00 AM)</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="timingLunch" value="15:00" />
+              <span>Lunch (3:00 PM)</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="timingDinner" value="21:00" />
+              <span>Dinner (9:00 PM)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>When to Take</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="mealRelation" value="before" checked />
+              <span>Before Meal</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="mealRelation" value="after" />
+              <span>After Meal</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="medicineDays">Number of Days</label>
+          <input
+            type="number"
+            id="medicineDays"
+            placeholder="e.g., 7"
+            min="1"
+          />
+        </div>
+
+        <button class="btn btn-primary" onclick="addMedicine()">
+          Add Medicine
+        </button>
+
+        <div class="medicines-list" id="medicinesList">
+          <!-- Dynamic medicine list -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Full List Screen -->
+    <div id="fullList" class="screen">
+      <div class="screen-header">
+        <h2>All Medicines</h2>
+        <p>Complete medication schedule</p>
+      </div>
+
+      <div class="full-list-container" id="fullListContainer">
+        <!-- Dynamic full list -->
+      </div>
+    </div>
+
+    <!-- Settings Screen -->
+    <div id="settings" class="screen">
+      <div class="screen-header">
+        <h2>Settings</h2>
+        <p>Manage your app preferences</p>
+      </div>
+
+      <div class="settings-container">
+        <div class="setting-card">
+          <div class="setting-info">
+            <h4>User Name</h4>
+            <p id="settingsUserName">User</p>
+          </div>
+          <button class="btn btn-secondary" onclick="changeUserName()">
+            Change
+          </button>
+        </div>
+
+        <div class="setting-card">
+          <div class="setting-info">
+            <h4>Water Reminders</h4>
+            <p>Every 2 hours (9 AM - 10 PM)</p>
+          </div>
+          <label class="toggle">
+            <input
+              type="checkbox"
+              id="waterReminderToggle"
+              checked
+              onchange="toggleWaterReminder()"
+            />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-card">
+          <div class="setting-info">
+            <h4>Sound Notifications</h4>
+            <p>Play sounds for reminders</p>
+          </div>
+          <label class="toggle">
+            <input
+              type="checkbox"
+              id="soundToggle"
+              checked
+              onchange="toggleSound()"
+            />
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-card">
+          <div class="setting-info">
+            <h4>Total Medicines</h4>
+            <p id="totalMedicines">0</p>
+          </div>
+        </div>
+
+        <button class="btn btn-danger" onclick="resetApp()">
+          Reset All Data
+        </button>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="nav-item active" onclick="switchScreen('home')">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-item" onclick="switchScreen('addMedicine')">
+        <span class="nav-icon">➕</span>
+        <span class="nav-label">Add</span>
+      </button>
+      <button class="nav-item" onclick="switchScreen('fullList')">
+        <span class="nav-icon">📋</span>
+        <span class="nav-label">List</span>
+      </button>
+      <button class="nav-item" onclick="switchScreen('settings')">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Settings</span>
+      </button>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
